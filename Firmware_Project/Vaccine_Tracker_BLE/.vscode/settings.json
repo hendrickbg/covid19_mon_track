@@ -1,0 +1,32 @@
+{
+    "files.associations": {
+        "gpio.h": "c",
+        "ht_ble_api.h": "c",
+        "ht_retriever.h": "c",
+        "stdint.h": "c",
+        "gatt_db.h": "c",
+        "main.h": "c",
+        "string.h": "c",
+        "stdio.h": "c",
+        "ht_app.h": "c",
+        "sensordemo_config.h": "c",
+        "sensor.h": "c",
+        "bluenrg_lp_hal_uart_ex.h": "c",
+        "bluenrg_lp_hal_rtc.h": "c",
+        "bluenrg_lp_it.h": "c",
+        "bluenrg_lp_stack.h": "c",
+        "ble_const.h": "c",
+        "gp_timer.h": "c",
+        "clock.h": "c",
+        "stdlib.h": "c",
+        "ht_sensor.h": "c",
+        "math.h": "c",
+        "adc.h": "c",
+        "bluenrg_lp_hal_spi_ex.h": "c",
+        "dma.h": "c",
+        "bluenrg_lp_hal_rtc_ex.h": "c",
+        "usart.h": "c",
+        "bluenrg_lp_hal_exti.h": "c",
+        "tim.h": "c"
+    }
+}
