@@ -6,3 +6,24 @@ Computer Engineering Undergraduate Thesis
 - Author: Hêndrick Bataglin Gonçalves
 - Year: 2021/1
 
+<hr>
+
+Hyper Links:
+
+* [Firmware Project](Firmware_Project);
+* [Hardware_Project](Hardware_Project).
+
+<hr>
+
+## Project
+
+Undergraduate Thesis developed using [iMCP HT32SX](https://github.com/htmicron/ht32sx) and BlueNRG-LP.
+
+<hr>
+
+## Contact
+
+Email: hendrick.goncalves@edu.pucrs.br
+
+
+

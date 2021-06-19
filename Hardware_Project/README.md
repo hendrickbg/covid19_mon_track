@@ -11,4 +11,4 @@ Hyper links:
 
 * [PCB Schematic](Schematic.pdf);
 * [Gerber Files](Gerber_Files);
-* [Centroid Files](Centroid_Files);
+* [Centroid Files](Centroid_Files).
