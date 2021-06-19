@@ -1,7 +1,7 @@
 # Hardware Documents
 
 <div align="center">
-  <img src='3d_view.PNG' id="3d" height="80%" width="80%"/>
+  <img src='3d_view.png' id="3d" height="80%" width="80%"/>
 </div>
 <div align="center"> Figure 1 - PCB 3D View. </div>
 
