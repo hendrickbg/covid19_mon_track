@@ -1,6 +1,6 @@
 # Firmware Project
 
-This firmware project is not related to [THIS](../Hardware_Project) hardware version! It was made for the Vaccine Tracker POC version. Be careful about pinout and peripheral config.
+This firmware project is not related to [THIS](../Hardware_Project) hardware version! Be careful about pinout and peripheral config.
 
 * [iMCP HT32SX Firmware](HT32SX_Firmware/AT_Commands);
 * [BlueNRG-LP Firmware](Vaccine_Tracker_BLE).
