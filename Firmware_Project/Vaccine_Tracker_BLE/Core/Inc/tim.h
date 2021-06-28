@@ -16,7 +16,7 @@
 
 /* Compute the prescaler value to have TIM1 counter clock equal to 10000 Hz */
 #define PRESCALER_VALUE (uint32_t)((TIM_PERIPHCLK / 10000) - 1)
-#define PERIOD_VALUE (30000 - 1)                    /* </ 3s timeout */
+#define PERIOD_VALUE (50000 - 1)                    /* </ 3s timeout */
 
 #define TIM_COUNTER_VALUE                   2
 

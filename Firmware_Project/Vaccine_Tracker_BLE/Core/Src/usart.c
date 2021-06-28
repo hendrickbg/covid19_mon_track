@@ -17,7 +17,7 @@ extern volatile uint8_t usart_flag;
 
 void MX_USART1_UART_Init(void) {
     /* GPIO Ports Clock Enable */
-    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
 
     huart1.Instance = USART1;
     huart1.Init.BaudRate = 115200;
@@ -64,12 +64,12 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
         PA9/AF0   ------> USART1_TX
         PA8/AF0   ------> USART1_RX 
         */
-        GPIO_InitStruct.Pin = GPIO_PIN_9 | GPIO_PIN_0;
+        GPIO_InitStruct.Pin = GPIO_PIN_9 | GPIO_PIN_8;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_PULLUP;
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
         GPIO_InitStruct.Alternate = GPIO_AF0_USART1;
-        HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
         /* USART1 interrupt Init */
         HAL_NVIC_SetPriority(USART1_IRQn, 0);
         HAL_NVIC_EnableIRQ(USART1_IRQn);
@@ -84,23 +84,19 @@ void HT_UART_MspDeInit(void) {
     /* Disable the UART peripheral */
     LL_USART_Disable(USART1);
 
-    /* Disable the UART clock */
-    __HAL_RCC_USART_FORCE_RESET();
-    __HAL_RCC_USART_RELEASE_RESET();
-
-    /* Peripheral clock disable */
-    __HAL_RCC_USART_CLK_DISABLE();
+    LL_APB1_DisableClock(LL_APB1_PERIPH_USART);
 
     /* Reset the UART pins */
-    LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_0, LL_GPIO_MODE_ANALOG);
-    LL_GPIO_SetPinSpeed(GPIOB, LL_GPIO_PIN_0, LL_GPIO_SPEED_FREQ_LOW);
-    LL_GPIO_SetPinOutputType(GPIOB, LL_GPIO_PIN_0, LL_GPIO_OUTPUT_OPENDRAIN);
-    LL_GPIO_SetPinPull(GPIOB, LL_GPIO_PIN_0, LL_GPIO_PULL_NO);
+    LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_8, LL_GPIO_MODE_ANALOG);
+    LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_8, LL_GPIO_SPEED_FREQ_LOW);
+    LL_GPIO_SetPinOutputType(GPIOA, LL_GPIO_PIN_8, LL_GPIO_OUTPUT_OPENDRAIN);
+    LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_8, LL_GPIO_PULL_NO);
 
-    LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_9, LL_GPIO_MODE_ANALOG);
-    LL_GPIO_SetPinSpeed(GPIOB, LL_GPIO_PIN_9, LL_GPIO_SPEED_FREQ_LOW);
-    LL_GPIO_SetPinOutputType(GPIOB, LL_GPIO_PIN_9, LL_GPIO_OUTPUT_OPENDRAIN);
-    LL_GPIO_SetPinPull(GPIOB, LL_GPIO_PIN_9, LL_GPIO_PULL_NO);
+    LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_9, LL_GPIO_MODE_ANALOG);
+    LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_9, LL_GPIO_SPEED_FREQ_LOW);
+    LL_GPIO_SetPinOutputType(GPIOA, LL_GPIO_PIN_9, LL_GPIO_OUTPUT_OPENDRAIN);
+    LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_9, LL_GPIO_PULL_NO);
+    
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle) {

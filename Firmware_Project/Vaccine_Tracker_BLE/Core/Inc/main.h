@@ -61,11 +61,11 @@
 /* Display interface */
 #define DC_Pin GPIO_PIN_8
 #define DC_GPIO_Port GPIOB
-#define BUSY_Pin GPIO_PIN_2
-#define BUSY_GPIO_Port GPIOB //VAI SER PB6
-#define RST_Pin GPIO_PIN_5
-#define RST_GPIO_Port GPIOB  //VAI SER O PB10
-#define SPI_CS_Pin GPIO_PIN_11 
+#define BUSY_Pin GPIO_PIN_6
+#define BUSY_GPIO_Port GPIOB 
+#define RST_Pin GPIO_PIN_10
+#define RST_GPIO_Port GPIOB  
+#define SPI_CS_Pin GPIO_PIN_11
 #define SPI_CS_GPIO_Port GPIOA
 
 

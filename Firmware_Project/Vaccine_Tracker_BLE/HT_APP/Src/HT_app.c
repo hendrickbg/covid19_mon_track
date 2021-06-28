@@ -46,6 +46,8 @@ uint8_t seal_irqn = 0;
 uint8_t batt_lvl = 0;
 extern uint8_t wkp_flag;
 
+uint8_t clear_flag = 0;
+
 EPD epd;
 
 void HT_APP_ConfigWakeupIO(void) {
@@ -215,6 +217,7 @@ void HT_APP_WaitForResponse(void) {
 }
 
 void HT_APP_SendATCommand(char *cmd) {
+	uint8_t clear_buff;
 	usart_callback = 0;
 
 	while (1) {
@@ -222,6 +225,11 @@ void HT_APP_SendATCommand(char *cmd) {
 		if(cmd_flag) {
 			memset(usart_buffer, 0, sizeof(usart_buffer));
 			HAL_UART_Transmit(&huart1, (uint8_t *)cmd, strlen(cmd), 0xFF);
+
+			if(clear_flag){
+				HAL_UART_Receive(&huart1, &clear_buff, 1, 100);
+				clear_flag = 0;
+			}
 
 			HAL_UART_Receive_IT(&huart1, (uint8_t *)usart_buffer, USART_BUFFER_SIZE);
 			HT_APP_InitTimeout();
@@ -273,9 +281,9 @@ void HT_APP_SendATCommand(char *cmd) {
 void HT_APP_ResetSigfoxMod(void) {
 	
 	/* Reset HT32SX */
-	GPIOA->BSRR = 1 << 30;
+	GPIOB->BSRR = 1 << 17;
 	HAL_Delay(50);
-	GPIOA->BSRR = 1 << 14;
+	GPIOB->BSRR = 1 << 1;
 	HAL_Delay(50);
 }
 
@@ -285,7 +293,7 @@ void HT_APP_ReadTemperatureSensor(uint8_t ble_resp) {
 	float battery_lvl;
 
 	/* Turn on NTC sensor. */
-	GPIOA->BSRR = 1 << 6;
+	GPIOA->BSRR = 1 << 5;
 
 	/* Read temperature */
 	HT_ADC_ReadFloatAdc(&v_out, &battery_lvl);
@@ -334,11 +342,8 @@ void HT_APP_DeepSleepState(void) {
 		MX_GPIO_LP_Init();
 	}
 
-	/* Switch PNP transistor to turn off ePaper display */
-	GPIOA->BSRR = 1 << 7;
-
 	/* Turn off NTC sensor. */
-	GPIOA->BSRR = 1 << 22;
+	GPIOA->BSRR = 1 << 21;
 	
 	/* Power Save Request */
     HAL_PWR_MNGR_Request(POWER_SAVE_LEVEL_STOP_WITH_TIMER, wakeupIO, &stopLevel);
@@ -371,9 +376,6 @@ void HT_APP_UpdateDisplay(void) {
 		sprintf(event_str, "Event: PERIODIC");
 	else 
 		sprintf(event_str, "Event: TEMPERATURE");
-
-	/* Switch PNP transistor to enable ePaper display */
-	GPIOA->BSRR = 1 << 23;
 
 	if (EPD_Init(&epd, lut_full_update) != 0) 
 		printf("e-Paper init failed\n");
@@ -412,6 +414,8 @@ void HT_APP_SendFrameState(HT_payload *payload) {
 	
 	HT_APP_WakeUpHT32();
 	HAL_Delay(1000);
+	
+	clear_flag = sleep_cont > 0 ? 1 : 0;
 
 	if(fsm_state != HT_SM_RESET_SIGFOX_MOD) {
 		HT_APP_CfgSigfoxRegion();
@@ -438,9 +442,9 @@ void HT_APP_ButtonHandlerState(void) {
 		deepSleepModeFlag = 0;
 	}
 
-	GPIOA->BSRR = 1 << 22; /* </ Turn on LED */
+	GPIOA->BSRR = 1 << 5; /* </ Turn on LED */
 	HAL_Delay(100);
-	GPIOA->BSRR = 1 << 6; /* </ Turn off LED */
+	GPIOA->BSRR = 1 << 21; /* </ Turn off LED */
 
 	tim_counter = 0;
 	event_type = HT_BUTTON_EVENT;
@@ -455,9 +459,9 @@ void HT_APP_SealHandlerState(void) {
 		deepSleepModeFlag = 0;
 	}
 
-	GPIOA->BSRR = 1 << 22; /* </ Turn on LED */
+	GPIOA->BSRR = 1 << 5; /* </ Turn on LED */
 	HAL_Delay(100);
-	GPIOA->BSRR = 1 << 6; /* </ Turn off LED */
+	GPIOA->BSRR = 1 << 21; /* </ Turn off LED */
 
 	seal_state = HT_SEAL_OPEN;
 	tim_counter = 0;
@@ -565,10 +569,7 @@ void HT_APP_fsm(void) {
 
 	case HT_SM_CALIBRATION_PROCESS:
 
-		GPIOA->BSRR = 1 << 6;
-
 		HT_APP_CalibrationProcessState();
-
 		HAL_Delay(100);
 		
 		break;
