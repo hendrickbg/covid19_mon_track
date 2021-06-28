@@ -18,7 +18,6 @@ Undergraduate Thesis developed using [iMCP HT32SX](https://github.com/htmicron/h
 
 ```
 git clone git@github.com:HendrickGoncalves/covid19_mon_track.git
-
 ```
 
 <hr>
