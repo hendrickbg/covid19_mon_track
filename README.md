@@ -8,16 +8,25 @@ Computer Engineering Undergraduate Thesis
 
 <hr>
 
-Hyper Links:
-
-* [Firmware Project](Firmware_Project);
-* [Hardware_Project](Hardware_Project).
-
-<hr>
-
 ## Project
 
 Undergraduate Thesis developed using [iMCP HT32SX](https://github.com/htmicron/ht32sx) and BlueNRG-LP.
+
+<hr>
+
+## How to Clone this Repository
+
+```
+git clone git@github.com:HendrickGoncalves/covid19_mon_track.git
+
+```
+
+<hr>
+
+## Hyper Links:
+
+* [Firmware Project](Firmware_Project);
+* [Hardware_Project](Hardware_Project).
 
 <hr>
 
