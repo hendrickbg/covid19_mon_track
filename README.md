@@ -26,6 +26,7 @@ git clone git@github.com:HendrickGoncalves/covid19_mon_track.git
 
 * [Firmware Project](Firmware_Project);
 * [Hardware_Project](Hardware_Project).
+* [Monograph](TCC-Monograph.pdf)
 
 <hr>
 
