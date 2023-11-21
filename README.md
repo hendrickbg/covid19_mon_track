@@ -32,7 +32,7 @@ git clone git@github.com:HendrickGoncalves/covid19_mon_track.git
 
 ## Contact
 
-Email: hendrick.goncalves@edu.pucrs.br
-
+Email: hendrick.goncalves2019@gmail.com \
+LinkedIn: https://www.linkedin.com/in/hendrick-goncalves/
 
 
